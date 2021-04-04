@@ -13,11 +13,33 @@ function Navbar() {
   return (
     <div className="flex bg-gray-100">
       {(isStatic || !isClosed) && (
-        <aside className="bg-white w-64 min-h-screen flex flex-col">
-          <div className="bg-white border-r border-b px-4 h-10 flex items-center">
+        <aside className={`bg-white w-64 min-h-screen flex flex-col ${isStatic ? '' : 'fixed'}`}>
+          <div className="bg-white border-r border-b px-4 h-20 flex items-center justify-between">
             <span className="text-blue py-2">
               Application
             </span>
+
+            {!isStatic && (
+              <button
+                tabIndex="1"
+                aria-label="Close menu"
+                titel="Close menu"
+                className="w-10 0-1"
+                onClick={() => setClosed(true)}
+              >
+                <svg
+                  fill="none"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="1"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path d="M6 18L18 6M6 6l12 12"></path>
+                </svg>
+              </button>
+            )}
+
           </div>
           <div className="border-r flex-grow">
             <nav>
@@ -44,48 +66,29 @@ function Navbar() {
       )}
 
       <main className="flex-grow flex flex-col min-h-screen">
-        <header className="bg-white border-b h-10 flex items-center justify-center">
-          {!isStatic &&
-            (isClosed ? (
-              <button
-                tabIndex="1"
-                aria-label="Open menu"
-                titel="Open menu"
-                className="w-10 0-1"
-                onClick={() => setClosed(false)}
+        <header className="bg-white border-b h-15 flex items-center justify-center">
+          {!isStatic && (isClosed && (
+            <button
+              tabIndex="1"
+              aria-label="Open menu"
+              titel="Open menu"
+              className="w-10 0-1"
+              onClick={() => setClosed(false)}
+            >
+              <svg
+                aria-hidden="true"
+                fill="none"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="1"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
               >
-                <svg
-                  aria-hidden="true"
-                  fill="none"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth="2"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                >
-                  <path d="M4 6h16M4 12h16M4 18h16"></path>
-                </svg>
-              </button>
-            ) : (
-              <button
-                tabIndex="1"
-                aria-label="Close menu"
-                titel="Close menu"
-                className="w-10 0-1"
-                onClick={() => setClosed(true)}
-              >
-                <svg
-                  fill="none"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth="2"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                >
-                  <path d="M6 18L18 6M6 6l12 12"></path>
-                </svg>
-              </button>
-            ))}
+                <path d="M4 6h16M4 12h16M4 18h16"></path>
+              </svg>
+            </button>
+          )
+          )}
 
 
           <div className="flex flex-grow items-center justify-between px-3">
